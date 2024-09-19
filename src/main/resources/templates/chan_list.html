@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách Chăn</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/chan.css}">
+</head>
+<body>
+<h1>Danh sách Chăn</h1>
+<a href="/chan/new">Thêm Chăn</a>
+<table border="1">
+    <tr>
+<!--        <th>ID</th>-->
+        <th>Mã</th>
+        <th>Tên</th>
+        <th>Số lượng</th>
+        <th>Hình ảnh</th>
+        <th>Hành động</th>
+    </tr>
+    <tr th:each="chan : ${listChan}">
+<!--        <td th:text="${chan.id}"></td>-->
+        <td th:text="${chan.ma}"></td>
+        <td th:text="${chan.ten}"></td>
+        <td th:text="${chan.soLuong}"></td>
+        <td>
+<!--            <img th:src="@{${chan.anh}}" alt="chan" width="100">-->
+            <img src="\images\chan_long _vu.jpg" alt="Chăn lông vũ">
+        </td>
+        <td>
+            <a th:href="@{/chan/edit/{id}(id=${chan.id})}">Sửa</a>
+            <a th:href="@{/chan/delete/{id}(id=${chan.id})}">Xóa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
