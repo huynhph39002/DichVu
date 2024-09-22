@@ -38,14 +38,14 @@ public class DemController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditDemForm(@PathVariable("id") Long id, Model model) {
+    public String showEditDemForm(@PathVariable("id") Integer id, Model model) {
         Dem dem  = demService.getDemById(id);
         model.addAttribute("dem", dem);
         return "dem_form";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDem(@PathVariable("id") Long id) {
+    public String deleteDem(@PathVariable("id") Integer id) {
         demService.deleteDemById(id);
         return "redirect:/dem";
     }

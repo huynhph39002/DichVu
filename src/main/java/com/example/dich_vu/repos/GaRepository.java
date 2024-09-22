@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface GaRepository extends JpaRepository<Ga,Long> {
+public interface GaRepository extends JpaRepository<Ga,Integer> {
 }

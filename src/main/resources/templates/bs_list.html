@@ -14,6 +14,7 @@
         <th>Tên</th>
         <th>Số lượng</th>
         <th>Hình ảnh</th>
+        <th>Gia</th>
         <th>Hành động</th>
     </tr>
     <tr th:each="bs : ${listBuaSang}">
@@ -22,9 +23,10 @@
         <td th:text="${bs.ten}"></td>
         <td th:text="${bs.soLuong}"></td>
         <td>
-            <img src="\images\bua_sang_kieu_au.jpg" alt="bua sang kieu au">
-<!--            <img th:src="@{${bs.anh}}" alt="Hình ảnh" width="100">-->
+            <img th:src="@{${'/' + bs.anh}}" alt="bua sang" width="100">
         </td>
+        <td th:text="${bs.gia}"></td>
+
         <td>
             <a th:href="@{/bs/edit/{id}(id=${bs.id})}">Sửa</a>
             <a th:href="@{/bs/delete/{id}(id=${bs.id})}">Xóa</a>

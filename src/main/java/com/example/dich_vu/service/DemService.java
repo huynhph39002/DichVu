@@ -20,11 +20,11 @@ public class DemService {
         demRepository.save(dem);
     }
 
-    public Dem getDemById(Long id) {
+    public Dem getDemById(Integer id) {
         return demRepository.findById(id).orElse(null);
     }
 
-    public void deleteDemById(Long id) {
+    public void deleteDemById(Integer id) {
         demRepository.deleteById(id);
     }
 }

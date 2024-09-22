@@ -40,10 +40,23 @@
 
         <!-- Hình ảnh -->
         <div class="mb-3">
-            <label for="hinhAnh" class="form-label">Hình ảnh:</label>
-            <input type="text" class="form-control" th:field="*{anh}" id="hinhAnh" required />
+            <label for="anh" class="form-label">Hình ảnh:</label>
+            <input type="file" class="form-control" name="hinhAnhFile" id="anh" required />
+            <div class="invalid-feedback">Vui lòng chọn hình ảnh.</div>
+        </div>
+<!--        <div class="mb-3">-->
+<!--            <label for="hinhAnh" class="form-label">Hình ảnh:</label>-->
+<!--            <input type="text" class="form-control" th:field="*{anh}" id="hinhAnh" required />-->
+<!--            <div class="invalid-feedback">-->
+<!--                Vui lòng nhập đường dẫn hình ảnh.-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="mb-3">
+            <label for="gia" class="form-label">Gia:</label>
+            <input type="number" class="form-control" th:field="*{gia}" id="gia" required />
             <div class="invalid-feedback">
-                Vui lòng nhập đường dẫn hình ảnh.
+                Vui lòng nhập số gia.
             </div>
         </div>
 

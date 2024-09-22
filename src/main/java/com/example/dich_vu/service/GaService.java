@@ -20,11 +20,11 @@ public class GaService {
         gaRepository.save(ga);
     }
 
-    public Ga getGaById(Long id) {
+    public Ga getGaById(Integer id) {
         return gaRepository.findById(id).orElse(null);
     }
 
-    public void deleteGaById(Long id) {
+    public void deleteGaById(Integer id) {
         gaRepository.deleteById(id);
     }
 }

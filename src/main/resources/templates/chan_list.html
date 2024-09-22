@@ -1,3 +1,84 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Danh sách Chăn</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/chan.css}">-->
+<!--    <style>-->
+<!--        /* CSS cho overlay */-->
+<!--        #imageOverlay {-->
+<!--            display: none; /* Ẩn mặc định */-->
+<!--            position: fixed; /* Vị trí cố định */-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background-color: rgba(0, 0, 0, 0.8); /* Màu nền mờ */-->
+<!--            justify-content: center; /* Căn giữa */-->
+<!--            align-items: center; /* Căn giữa */-->
+<!--            z-index: 1000; /* Đè lên các phần tử khác */-->
+<!--        }-->
+<!--        #overlayImage {-->
+<!--            max-width: 90%; /* Kích thước ảnh lớn */-->
+<!--            max-height: 90%; /* Kích thước ảnh lớn */-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Danh sách Chăn</h1>-->
+<!--<a href="/chan/new">Thêm Chăn</a>-->
+<!--<table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Mã</th>-->
+<!--        <th>Tên</th>-->
+<!--        <th>Số lượng</th>-->
+<!--        <th>Hình ảnh</th>-->
+<!--        <th>Giá</th>-->
+<!--        <th>Hành động</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="chan : ${listChan}">-->
+<!--        <td th:text="${chan.ma}"></td>-->
+<!--        <td th:text="${chan.ten}"></td>-->
+<!--        <td th:text="${chan.soLuong}"></td>-->
+<!--        <td>-->
+<!--            <img th:src="@{${chan.anh}}" alt="Hình ảnh Chăn" width="100" class="img-thumbnail"-->
+<!--                 th:attr="onclick='showImage(this.src)'">-->
+<!--        </td>-->
+<!--        <p th:text="${chan.anh}"></p>-->
+<!--        <td th:text="${chan.gia}"></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{/chan/edit/{id}(id=${chan.id})}">Sửa</a>-->
+<!--            <a th:href="@{/chan/delete/{id}(id=${chan.id})}">Xóa</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--&lt;!&ndash; Overlay để hiển thị ảnh lớn &ndash;&gt;-->
+<!--<div id="imageOverlay" onclick="hideImage()">-->
+<!--    <img id="overlayImage" src="" alt="Hình ảnh lớn">-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function showImage(src) {-->
+<!--        var overlay = document.getElementById('imageOverlay');-->
+<!--        var overlayImage = document.getElementById('overlayImage');-->
+<!--        overlayImage.src = src; // Gán đường dẫn ảnh lớn vào thẻ img-->
+<!--        overlay.style.display = 'flex'; // Hiển thị overlay-->
+<!--    }-->
+
+<!--    function hideImage() {-->
+<!--        var overlay = document.getElementById('imageOverlay');-->
+<!--        overlay.style.display = 'none'; // Ẩn overlay khi nhấn ra ngoài-->
+<!--    }-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -10,22 +91,33 @@
 <a href="/chan/new">Thêm Chăn</a>
 <table border="1">
     <tr>
-<!--        <th>ID</th>-->
+        <!--        <th>ID</th>-->
         <th>Mã</th>
         <th>Tên</th>
         <th>Số lượng</th>
         <th>Hình ảnh</th>
+        <th>Gia</th>
         <th>Hành động</th>
     </tr>
     <tr th:each="chan : ${listChan}">
-<!--        <td th:text="${chan.id}"></td>-->
+        <!--        <td th:text="${chan.id}"></td>-->
         <td th:text="${chan.ma}"></td>
         <td th:text="${chan.ten}"></td>
         <td th:text="${chan.soLuong}"></td>
+        <!--                <td>-->
+        <!--            <img th:src="@{${'/' + chan.anh}}" alt="hinh anh chan" width="100">-->
+        <!--        </td>-->
         <td>
-<!--            <img th:src="@{${chan.anh}}" alt="chan" width="100">-->
-            <img src="\images\chan_long _vu.jpg" alt="Chăn lông vũ">
+            <img th:src="@{${chan.anh}}" alt="Hình ảnh Chăn" width="100">
         </td>
+
+        <td th:text="${chan.gia}"></td>
+
+        <!-- <td>
+     <img th:src="@{/${chan.anh}}" alt="chan long vu" width="100">
+ </td>-->
+<!--                <p th:text="${chan.anh}"></p> &lt;!&ndash; Kiểm tra đường dẫn ảnh &ndash;&gt;-->
+
         <td>
             <a th:href="@{/chan/edit/{id}(id=${chan.id})}">Sửa</a>
             <a th:href="@{/chan/delete/{id}(id=${chan.id})}">Xóa</a>

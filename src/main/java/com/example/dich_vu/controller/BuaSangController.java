@@ -37,14 +37,14 @@ public class BuaSangController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditBSForm(@PathVariable("id") Long id, Model model) {
+    public String showEditBSForm(@PathVariable("id") Integer id, Model model) {
         BuaSang buaSang = buaSangService.getBSById(id);
         model.addAttribute("bs", buaSang);
         return "bs_form";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBS(@PathVariable("id") Long id) {
+    public String deleteBS(@PathVariable("id") Integer id) {
         buaSangService.deleteBSById(id);
         return "redirect:/bs";
     }

@@ -9,22 +9,24 @@
 <a href="/ga/new">Thêm ga</a>
 <table border="1">
     <tr>
-<!--        <th>ID</th>-->
+        <!--        <th>ID</th>-->
         <th>Mã</th>
         <th>Tên</th>
         <th>Số lượng</th>
         <th>Hình ảnh</th>
+        <th>Gia</th>
         <th>Hành động</th>
     </tr>
     <tr th:each="ga : ${listGa}">
-<!--        <td th:text="${ga.id}"></td>-->
+        <!--        <td th:text="${ga.id}"></td>-->
         <td th:text="${ga.ma}"></td>
         <td th:text="${ga.ten}"></td>
         <td th:text="${ga.soLuong}"></td>
         <td>
-            <img src="\images\ga_cotton.jpg" alt="ga">
-<!--            <img th:src="@{${ga.anh}}" alt="Hình ảnh" width="100">-->
+            <img th:src="@{${'/' + ga.anh}}" alt="ga cotton" width="100">
         </td>
+        <td th:text="${ga.gia}"></td>
+
         <td>
             <a th:href="@{/ga/edit/{id}(id=${ga.id})}">Sửa</a>
             <a th:href="@{/ga/delete/{id}(id=${ga.id})}">Xóa</a>

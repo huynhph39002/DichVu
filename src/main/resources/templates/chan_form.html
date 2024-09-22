@@ -7,74 +7,83 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center mb-4">Thêm/Sửa Chăn</h1>
-    <form th:action="@{/chan/save}" th:object="${chan}" method="post" class="needs-validation" novalidate>
-        <!-- Trường ẩn để lưu ID -->
+    <form th:action="@{/chan/save}" th:object="${chan}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
         <input type="hidden" th:field="*{id}" />
 
-        <!-- Mã -->
         <div class="mb-3">
             <label for="ma" class="form-label">Mã:</label>
             <input type="text" class="form-control" th:field="*{ma}" id="ma" required />
-            <div class="invalid-feedback">
-                Vui lòng nhập mã.
+            <div th:if="${#fields.hasErrors('ma')}" class="error-message">
+                <p th:errors="*{ma}"></p>
             </div>
+<!--            <div th:if="${#fields.hasErrors('ma')}" th:errors="*{ma}" class="error"></div>-->
+<!--            <div class="invalid-feedback">Vui lòng nhập mã.</div>-->
         </div>
 
-        <!-- Tên -->
         <div class="mb-3">
             <label for="ten" class="form-label">Tên:</label>
             <input type="text" class="form-control" th:field="*{ten}" id="ten" required />
-            <div class="invalid-feedback">
-                Vui lòng nhập tên.
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('ten')}">
+                <span th:each="err : ${#fields.errors('ten')}" th:text="${err}"></span>
             </div>
+<!--            <div th:if="${#fields.hasErrors('ten')}" th:errors="*{ten}" class="error"></div>-->
+<!--            <div class="invalid-feedback">Vui lòng nhập tên.</div>-->
         </div>
 
-        <!-- Số lượng -->
         <div class="mb-3">
             <label for="soLuong" class="form-label">Số lượng:</label>
             <input type="number" class="form-control" th:field="*{soLuong}" id="soLuong" required />
-            <div class="invalid-feedback">
-                Vui lòng nhập số lượng.
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('soLuong')}">
+                <span th:each="err : ${#fields.errors('soLuong')}" th:text="${err}"></span>
             </div>
+<!--            <div th:if="${#fields.hasErrors('soLuong')}" th:errors="*{soLuong}" class="error"></div>-->
+<!--            <div class="invalid-feedback">Vui lòng nhập số lượng.</div>-->
         </div>
 
-        <!-- Hình ảnh -->
+        <!-- Thay đổi input ảnh -->
         <div class="mb-3">
             <label for="anh" class="form-label">Hình ảnh:</label>
-            <input type="text" class="form-control" th:field="*{anh}" id="anh" required />
-            <div class="invalid-feedback">
-                Vui lòng nhập đường dẫn hình ảnh.
+            <input type="file" class="form-control" name="hinhAnhFile" id="anh" required />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('anh')}">
+                <span th:each="err : ${#fields.errors('anh')}" th:text="${err}"></span>
             </div>
+<!--            <div th:if="${#fields.hasErrors('anh')}" th:errors="*{anh}" class="error"></div>-->
+<!--            <div class="invalid-feedback">Vui lòng chọn hình ảnh.</div>-->
         </div>
 
-        <!-- Nút lưu -->
+        <div class="mb-3">
+            <label for="gia" class="form-label">Gia:</label>
+            <input type="number" class="form-control" th:field="*{gia}" id="gia" required />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('gia')}">
+                <span th:each="err : ${#fields.errors('gia')}" th:text="${err}"></span>
+            </div>
+<!--            <div th:if="${#fields.hasErrors('gia')}" th:errors="*{gia}" class="error"></div>-->
+<!--            <div class="invalid-feedback">Vui lòng nhập số gia.</div>-->
+        </div>
+
         <div class="text-center">
             <button type="submit" class="btn btn-primary">Lưu</button>
-            <a th:href="@{/bs}" class="btn btn-secondary ms-2">Quay lại</a>
+            <a th:href="@{/chan}" class="btn btn-secondary ms-2">Quay lại</a>
         </div>
     </form>
 </div>
 
-<!-- Bootstrap JS for form validation -->
+<!-- JS validation -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Custom Bootstrap validation
     (function () {
-        'use strict'
-        var forms = document.querySelectorAll('.needs-validation')
-
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
 </script>
 </body>
 </html>
@@ -88,20 +97,106 @@
 <!--<html xmlns:th="http://www.thymeleaf.org">-->
 <!--<head>-->
 <!--    <title>Thêm/Sửa Chăn</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">-->
 <!--</head>-->
 <!--<body>-->
-<!--<h1>Thêm/Sửa Chăn</h1>-->
-<!--<form th:action="@{/chan/save}" th:object="${chan}" method="post">-->
-<!--    <input type="hidden" th:field="*{id}" />-->
-<!--    <label>Mã: </label>-->
-<!--    <input type="text" th:field="*{ma}" /><br/>-->
-<!--    <label>Tên: </label>-->
-<!--    <input type="text" th:field="*{ten}" /><br/>edit-->
-<!--    <label>Số lượng: </label>-->
-<!--    <input type="number" th:field="*{soLuong}" /><br/>-->
-<!--    <label>Hình ảnh: </label>-->
-<!--    <input type="text" th:field="*{anh}" /><br/>-->
-<!--    <button type="submit">Lưu</button>-->
-<!--</form>-->
+<!--<div class="container mt-5">-->
+<!--    <h1 class="text-center mb-4">Thêm/Sửa Chăn</h1>-->
+<!--    <form th:action="@{/chan/save}" th:object="${chan}" method="post" class="needs-validation" novalidate>-->
+<!--        &lt;!&ndash; Trường ẩn để lưu ID &ndash;&gt;-->
+<!--        <input type="hidden" th:field="*{id}" />-->
+
+<!--        &lt;!&ndash; Mã &ndash;&gt;-->
+<!--        <div class="mb-3">-->
+<!--            <label for="ma" class="form-label">Mã:</label>-->
+<!--            <input type="text" class="form-control" th:field="*{ma}" id="ma" required />-->
+<!--            <div class="invalid-feedback">-->
+<!--                Vui lòng nhập mã.-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Tên &ndash;&gt;-->
+<!--        <div class="mb-3">-->
+<!--            <label for="ten" class="form-label">Tên:</label>-->
+<!--            <input type="text" class="form-control" th:field="*{ten}" id="ten" required />-->
+<!--            <div class="invalid-feedback">-->
+<!--                Vui lòng nhập tên.-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Số lượng &ndash;&gt;-->
+<!--        <div class="mb-3">-->
+<!--            <label for="soLuong" class="form-label">Số lượng:</label>-->
+<!--            <input type="number" class="form-control" th:field="*{soLuong}" id="soLuong" required />-->
+<!--            <div class="invalid-feedback">-->
+<!--                Vui lòng nhập số lượng.-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Hình ảnh &ndash;&gt;-->
+<!--        <div class="mb-3">-->
+<!--            <label for="anh" class="form-label">Hình ảnh:</label>-->
+<!--            <input type="text" class="form-control" th:field="*{anh}" id="anh" required />-->
+<!--            <div class="invalid-feedback">-->
+<!--                Vui lòng nhập đường dẫn hình ảnh.-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Nút lưu &ndash;&gt;-->
+<!--        <div class="text-center">-->
+<!--            <button type="submit" class="btn btn-primary">Lưu</button>-->
+<!--            <a th:href="@{/bs}" class="btn btn-secondary ms-2">Quay lại</a>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Bootstrap JS for form validation &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script>-->
+<!--    // Custom Bootstrap validation-->
+<!--    (function () {-->
+<!--        'use strict'-->
+<!--        var forms = document.querySelectorAll('.needs-validation')-->
+
+<!--        Array.prototype.slice.call(forms)-->
+<!--            .forEach(function (form) {-->
+<!--                form.addEventListener('submit', function (event) {-->
+<!--                    if (!form.checkValidity()) {-->
+<!--                        event.preventDefault()-->
+<!--                        event.stopPropagation()-->
+<!--                    }-->
+
+<!--                    form.classList.add('was-validated')-->
+<!--                }, false)-->
+<!--            })-->
+<!--    })()-->
+<!--</script>-->
 <!--</body>-->
 <!--</html>-->
+
+
+
+
+
+
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html xmlns:th="http://www.thymeleaf.org">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Thêm/Sửa Chăn</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>Thêm/Sửa Chăn</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<form th:action="@{/chan/save}" th:object="${chan}" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="hidden" th:field="*{id}" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <label>Mã: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" th:field="*{ma}" /><br/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <label>Tên: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" th:field="*{ten}" /><br/>edit&ndash;&gt;-->
+<!--&lt;!&ndash;    <label>Số lượng: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="number" th:field="*{soLuong}" /><br/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <label>Hình ảnh: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="text" th:field="*{anh}" /><br/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="submit">Lưu</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->

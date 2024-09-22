@@ -21,11 +21,11 @@ public class BuaSangService {
         buaSangRepoditory.save(buaSang);
     }
 
-    public BuaSang getBSById(Long id) {
+    public BuaSang getBSById(Integer id) {
         return buaSangRepoditory.findById(id).orElse(null);
     }
 
-    public void deleteBSById(Long id) {
+    public void deleteBSById(Integer id) {
         buaSangRepoditory.deleteById(id);
     }
 }

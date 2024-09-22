@@ -36,14 +36,14 @@ public class GaController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditGaForm(@PathVariable("id") Long id, Model model) {
+    public String showEditGaForm(@PathVariable("id") Integer id, Model model) {
         Ga ga  = gaService.getGaById(id);
         model.addAttribute("ga", ga);
         return "ga_form";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteGa(@PathVariable("id") Long id) {
+    public String deleteGa(@PathVariable("id") Integer id) {
         gaService.deleteGaById(id);
         return "redirect:/ga";
     }
